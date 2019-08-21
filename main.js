@@ -53,9 +53,9 @@ function listenEvents() {
 function goToSlides(index) {
 
     $slides.css({ transform: `translateX(-${index * 920}px)` })
-    $buttons.eq(index).addClass('active').siblings().removeClass('active', 'show')
+    $buttons.eq(index).addClass('active').siblings().removeClass('active')
     $tran.eq(index).addClass('show')
-    // $buttons.eq(index).siblings().children('.tran').removeClass('show')
+    $buttons.eq(index).siblings().children('.tran').removeClass('show')
 }
 
 
