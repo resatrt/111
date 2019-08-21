@@ -46,7 +46,6 @@ function listenEvents() {
     $buttons.on('click', function (e) {
         let index = $(e.currentTarget).index()
         goToSlides(index)
-        // n = index
     })
 }
 
