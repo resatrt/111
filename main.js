@@ -1,7 +1,8 @@
 let $slides = $('#slides')
 let $buttons = $('ul>li')
 let $tran = $('ul>li>div')
-let n = 0
+var n = 0
+
 listenEvents()
 
 let timer = setInterval(() => {
@@ -13,12 +14,12 @@ let timer = setInterval(() => {
 }, 2000);
 
 
-$('.window').on('mouseenter', function () { //鼠标状态反应
+$('.slides').on('mouseenter', function () { //鼠标状态反应
     window.clearInterval(timer)
 })
 
 
-$('.window').on('mouseleave', function () {
+$('.slides').on('mouseleave', function () {
     timer = setInterval(() => {
         goToSlides(n)
         n += 1
@@ -27,10 +28,11 @@ $('.window').on('mouseleave', function () {
         }
     }, 2000);
 })
-document.addEventListener('visibilitychange',function(){
-    if(this.visibilityState==='hidden'){
+
+document.addEventListener('visibilitychange', function () {
+    if (this.visibilityState === 'hidden') {
         window.clearInterval(timer)
-    }else{
+    } else {
         timer = setInterval(() => {
             goToSlides(n)
             n += 1
@@ -44,13 +46,13 @@ document.addEventListener('visibilitychange',function(){
 
 function listenEvents() {
     $buttons.on('click', function (e) {
-        let index = $(e.currentTarget).index()
-        goToSlides(index)
+        let eq = $(e.currentTarget).index()
+        n = eq  //缺少这个赋值会导致点击按钮后自动播放的下一张乱跳
+        goToSlides(eq)
     })
 }
 
 function goToSlides(index) {
-
     $slides.css({ transform: `translateX(-${index * 920}px)` })
     $buttons.eq(index).addClass('active').siblings().removeClass('active')
     $tran.eq(index).addClass('show')
